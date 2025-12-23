@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -18,6 +19,7 @@ interface CartItem extends Book {
 }
 
 const Index = () => {
+  const navigate = useNavigate();
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -110,7 +112,7 @@ const Index = () => {
             </div>
             <nav className="hidden md:flex gap-6">
               <a href="#home" className="text-sm font-medium hover:text-primary transition-colors">Главная</a>
-              <a href="#catalog" className="text-sm font-medium hover:text-primary transition-colors">Каталог</a>
+              <button onClick={() => navigate('/catalog')} className="text-sm font-medium hover:text-primary transition-colors">Каталог</button>
               <a href="#about" className="text-sm font-medium hover:text-primary transition-colors">О издательстве</a>
               <a href="#contacts" className="text-sm font-medium hover:text-primary transition-colors">Контакты</a>
             </nav>
@@ -144,7 +146,11 @@ const Index = () => {
             <p className="text-xl md:text-2xl font-light mb-8 drop-shadow-md">
               Качественная учебная литература для студентов
             </p>
-            <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold text-lg px-8 py-6">
+            <Button 
+              size="lg" 
+              onClick={() => navigate('/catalog')}
+              className="bg-white text-primary hover:bg-white/90 font-semibold text-lg px-8 py-6"
+            >
               Посмотреть каталог
               <Icon name="ArrowRight" className="ml-2" size={20} />
             </Button>
